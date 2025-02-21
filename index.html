@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動物占い - ポップなデザイン</title>
+    <style>
+        /* 全体のスタイル */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://source.unsplash.com/1600x900/?cute-animals') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* 背景のオーバーレイ（透明度を調整して読みやすくする） */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-column {
+            flex: 70%;
+            padding: 20px;
+        }
+
+        .right-column {
+            flex: 30%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+        }
+
+        #description {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        #compatibility {
+            font-size: 18px;
+            margin-top: 20px;
+            color: blue;
+        }
+
+        .share-buttons {
+            margin-top: 20px;
+        }
+
+        .share-buttons button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #ffcc00;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-column, .right-column {
+                flex: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 左カラム（占い結果） -->
+        <div class="left-column">
+            <h1>動物占い</h1>
+            <p>生年月日を入力してください：</p>
+            <input type="date" id="birthdate">
+            <button onclick="checkAnimal()">診断する</button>
+
+            <p id="result"></p>
+            <p id="description"></p>
+            <p id="compatibility"></p>
+
+            <!-- SNSシェアボタン -->
+            <div class="share-buttons">
+                <button onclick="shareOnTwitter()">X（旧Twitter）でシェア</button>
+                <button onclick="shareOnFacebook()">Facebookでシェア</button>
+                <button onclick="copyForInstagram()">Instagram用にコピー</button>
+            </div>
+        </div>
+
+        <!-- 右カラム（広告・リンクエリア） -->
+        <div class="right-column">
+            <h2>広告スペース</h2>
+            <p>ここに広告やアフィリエイトリンクを設置できます。</p>
+            <a href="https://www.example.com" target="_blank">
+                <img src="https://via.placeholder.com/250x150" alt="広告バナー">
+            </a>
+            <p><a href="https://www.example.com" target="_blank">広告リンクへ</a></p>
+        </div>
+    </div>
+
+    <script>
+        const animals = [
+            { name: "狼", description: "独立心が強く、マイペース。自分の世界を大切にする。", compatible: "ペガサス, こじか" },
+            { name: "こじか", description: "素直で甘え上手。人懐っこく、周りから愛される。", compatible: "狼, たぬき" },
+            { name: "猿", description: "明るく社交的で、ムードメーカー。好奇心が旺盛。", compatible: "コアラ, たぬき" },
+            { name: "チータ", description: "瞬発力があり行動派。決断が早く、勝負に強い。", compatible: "ライオン, コアラ" },
+            { name: "黒ひょう", description: "おしゃれでスマート。繊細で、人当たりが良い。", compatible: "ライオン, ゾウ" },
+            { name: "ライオン", description: "リーダー気質でカリスマ性がある。決断力がある。", compatible: "チータ, 黒ひょう" },
+            { name: "虎", description: "情熱的で負けず嫌い。信念を持ち、努力家。", compatible: "ペガサス, ひつじ" },
+            { name: "たぬき", description: "慎重で堅実派。周囲への気配りができる優しい人。", compatible: "猿, こじか" },
+            { name: "コアラ", description: "マイペースでのんびり。芯が強く、冷静な性格。", compatible: "猿, チータ" },
+            { name: "ゾウ", description: "真面目で努力家。責任感が強く、周りから信頼される。", compatible: "黒ひょう, ひつじ" },
+            { name: "ひつじ", description: "協調性があり、温厚。人のサポートが得意。", compatible: "虎, ゾウ" },
+            { name: "ペガサス", description: "自由奔放で直感的。ユニークな発想力がある。", compatible: "虎, 狼" }
+        ];
+
+        function checkAnimal() {
+            const birthdate = document.getElementById("birthdate").value;
+            if (!birthdate) {
+                document.getElementById("result").innerText = "生年月日を入力してください。";
+                return;
+            }
+
+            const birthYear = new Date(birthdate).getFullYear();
+            const animalIndex = birthYear % 12;
+            const animalData = animals[animalIndex];
+
+            document.getElementById("result").innerText = `あなたの動物は「${animalData.name}」です！`;
+            document.getElementById("description").innerText = `性格: ${animalData.description}`;
+            document.getElementById("compatibility").innerText = `相性が良い動物: ${animalData.compatible}`;
+        }
+    </script>
+
+</body>
+</html>
