@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>動物占い - ポップなデザイン</title>
+    <title>動物占い - 1カラムレイアウト</title>
     <style>
-        /* 全体のスタイル */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://source.unsplash.com/1600x900/?cute-animals') no-repeat center center fixed;
+            background: url('https://あなたのドメイン.com/images/background.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
 
-        /* 背景のオーバーレイ（透明度を調整して読みやすくする） */
         body::before {
             content: "";
             position: absolute;
@@ -28,27 +26,13 @@
         }
 
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .left-column {
-            flex: 70%;
-            padding: 20px;
-        }
-
-        .right-column {
-            flex: 30%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
             text-align: center;
-            border-radius: 8px;
         }
 
         input, button {
@@ -88,13 +72,16 @@
             border-radius: 5px;
         }
 
-        /* レスポンシブデザイン */
+        .ad-section {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
-            }
-            .left-column, .right-column {
-                flex: 100%;
+                width: 90%;
             }
         }
     </style>
@@ -102,66 +89,71 @@
 <body>
 
     <div class="container">
-        <!-- 左カラム（占い結果） -->
-        <div class="left-column">
-            <h1>動物占い</h1>
-            <p>生年月日を入力してください：</p>
-            <input type="date" id="birthdate">
-            <button onclick="checkAnimal()">診断する</button>
+        <h1>動物占い</h1>
+        <p>生年月日を入力してください：</p>
+        <input type="date" id="birthdate">
+        <button onclick="checkAnimal()">診断する</button>
 
-            <p id="result"></p>
-            <p id="description"></p>
-            <p id="compatibility"></p>
+        <p id="result"></p>
+        <p id="description"></p>
+        <p id="compatibility"></p>
 
-            <!-- SNSシェアボタン -->
-            <div class="share-buttons">
-                <button onclick="shareOnTwitter()">X（旧Twitter）でシェア</button>
-                <button onclick="shareOnFacebook()">Facebookでシェア</button>
-                <button onclick="copyForInstagram()">Instagram用にコピー</button>
-            </div>
-        </div>
-
-        <!-- 右カラム（広告・リンクエリア） -->
-        <div class="right-column">
-            <h2>広告スペース</h2>
-            <p>ここに広告やアフィリエイトリンクを設置できます。</p>
-            <a href="https://www.example.com" target="_blank">
-                <img src="https://via.placeholder.com/250x150" alt="広告バナー">
-            </a>
-            <p><a href="https://www.example.com" target="_blank">広告リンクへ</a></p>
+        <div class="share-buttons">
+            <button onclick="shareOnTwitter()">X（旧Twitter）でシェア</button>
+            <button onclick="shareOnFacebook()">Facebookでシェア</button>
         </div>
     </div>
 
+    <!-- 広告エリア（ページの一番下） -->
+    <div class="ad-section">
+        <a href="https://www.example.com" target="_blank">
+            <img src="https://via.placeholder.com/250x150" alt="広告バナー">
+        </a>
+    </div>
+
     <script>
+        let currentAnimalData = null;
+
         const animals = [
-            { name: "狼", description: "独立心が強く、マイペース。自分の世界を大切にする。", compatible: "ペガサス, こじか" },
-            { name: "こじか", description: "素直で甘え上手。人懐っこく、周りから愛される。", compatible: "狼, たぬき" },
-            { name: "猿", description: "明るく社交的で、ムードメーカー。好奇心が旺盛。", compatible: "コアラ, たぬき" },
-            { name: "チータ", description: "瞬発力があり行動派。決断が早く、勝負に強い。", compatible: "ライオン, コアラ" },
-            { name: "黒ひょう", description: "おしゃれでスマート。繊細で、人当たりが良い。", compatible: "ライオン, ゾウ" },
-            { name: "ライオン", description: "リーダー気質でカリスマ性がある。決断力がある。", compatible: "チータ, 黒ひょう" },
-            { name: "虎", description: "情熱的で負けず嫌い。信念を持ち、努力家。", compatible: "ペガサス, ひつじ" },
-            { name: "たぬき", description: "慎重で堅実派。周囲への気配りができる優しい人。", compatible: "猿, こじか" },
-            { name: "コアラ", description: "マイペースでのんびり。芯が強く、冷静な性格。", compatible: "猿, チータ" },
-            { name: "ゾウ", description: "真面目で努力家。責任感が強く、周りから信頼される。", compatible: "黒ひょう, ひつじ" },
-            { name: "ひつじ", description: "協調性があり、温厚。人のサポートが得意。", compatible: "虎, ゾウ" },
-            { name: "ペガサス", description: "自由奔放で直感的。ユニークな発想力がある。", compatible: "虎, 狼" }
+            { name: "狼", description: "独立心が強く、常に自分の世界を大切にする一匹狼。", compatible: "ペガサス, こじか" },
+            { name: "こじか", description: "素直で甘え上手。人懐っこく、周囲から可愛がられる。", compatible: "狼, たぬき" },
+            { name: "猿", description: "社交的で明るく、好奇心旺盛。機転が利き行動力がある。", compatible: "コアラ, たぬき" },
+            { name: "チータ", description: "瞬発力があり、決断力がある行動派リーダータイプ。", compatible: "ライオン, コアラ" },
+            { name: "黒ひょう", description: "プライドが高く、繊細でおしゃれ。直感で動く。", compatible: "ライオン, ゾウ" },
+            { name: "ライオン", description: "カリスマ性があり、責任感が強いリーダータイプ。", compatible: "チータ, 黒ひょう" },
+            { name: "虎", description: "情熱的で負けず嫌い。信念を貫く努力家。", compatible: "ペガサス, ひつじ" },
+            { name: "たぬき", description: "慎重で温厚。周囲への気配りができる努力家。", compatible: "猿, こじか" },
+            { name: "コアラ", description: "マイペースで冷静。芯が強く独特な発想を持つ。", compatible: "猿, チータ" },
+            { name: "ゾウ", description: "真面目で努力家。忍耐力があり信頼される。", compatible: "黒ひょう, ひつじ" },
+            { name: "ひつじ", description: "協調性があり、穏やかで周囲との調和を大切にする。", compatible: "虎, ゾウ" },
+            { name: "ペガサス", description: "自由奔放で直感的。独特な世界観を持つ天才肌。", compatible: "虎, 狼" }
         ];
 
         function checkAnimal() {
             const birthdate = document.getElementById("birthdate").value;
             if (!birthdate) {
-                document.getElementById("result").innerText = "生年月日を入力してください。";
+                alert("生年月日を入力してください！");
                 return;
             }
 
             const birthYear = new Date(birthdate).getFullYear();
             const animalIndex = birthYear % 12;
-            const animalData = animals[animalIndex];
+            currentAnimalData = animals[animalIndex];
 
-            document.getElementById("result").innerText = `あなたの動物は「${animalData.name}」です！`;
-            document.getElementById("description").innerText = `性格: ${animalData.description}`;
-            document.getElementById("compatibility").innerText = `相性が良い動物: ${animalData.compatible}`;
+            document.getElementById("result").innerText = `あなたの動物は「${currentAnimalData.name}」です！`;
+            document.getElementById("description").innerText = `性格: ${currentAnimalData.description}`;
+            document.getElementById("compatibility").innerText = `相性が良い動物: ${currentAnimalData.compatible}`;
+        }
+
+        function shareOnTwitter() {
+            if (!currentAnimalData) return alert("まずは診断してください！");
+            const text = encodeURIComponent(`私は「${currentAnimalData.name}」でした！\n#動物占い`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
+        }
+
+        function shareOnFacebook() {
+            if (!currentAnimalData) return alert("まずは診断してください！");
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, "_blank");
         }
     </script>
 
