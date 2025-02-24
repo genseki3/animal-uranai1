@@ -35,6 +35,18 @@
             text-align: center;
         }
 
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
         input, button {
             margin: 10px;
             padding: 10px;
@@ -79,6 +91,31 @@
             border-radius: 8px;
         }
 
+        .link-section {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .link-section a {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 250px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .link-section a:hover {
+            background: #e65c00;
+        }
+
         @media (max-width: 768px) {
             .container {
                 width: 90%;
@@ -90,6 +127,8 @@
 
     <div class="container">
         <h1>動物占い</h1>
+        <h2>生年月日を入れて自分の動物を確認してみましょう</h2>
+
         <p>生年月日を入力してください：</p>
         <input type="date" id="birthdate">
         <button onclick="checkAnimal()">診断する</button>
@@ -98,18 +137,35 @@
         <p id="description"></p>
         <p id="compatibility"></p>
 
+        <!-- ▼ 診断結果の下の広告エリア ▼ -->
+        <div class="ad-section">
+            <a href="https://www.example.com" target="_blank">
+                <img src="https://via.placeholder.com/250x150" alt="広告バナー">
+            </a>
+        </div>
+        <!-- ▲ 診断結果の下の広告エリア ▲ -->
+
         <div class="share-buttons">
             <button onclick="shareOnTwitter()">X（旧Twitter）でシェア</button>
             <button onclick="shareOnFacebook()">Facebookでシェア</button>
         </div>
     </div>
 
-    <!-- 広告エリア（ページの一番下） -->
+    <!-- ▼ ページの最下部の広告エリア ▼ -->
     <div class="ad-section">
         <a href="https://www.example.com" target="_blank">
             <img src="https://via.placeholder.com/250x150" alt="広告バナー">
         </a>
     </div>
+    <!-- ▲ ページの最下部の広告エリア ▲ -->
+
+    <!-- ▼ 今日の占い結果のリンク ▼ -->
+    <div class="link-section">
+        <p>今日の占いの結果はこちらから👇👇</p>
+        <a href="https://www.instagram.com/あなたのアカウント" target="_blank">📷 Instagramで見る</a>
+        <a href="https://あなたのブログ.com" target="_blank">📝 ブログで読む</a>
+    </div>
+    <!-- ▲ 今日の占い結果のリンク ▲ -->
 
     <script>
         let currentAnimalData = null;
@@ -120,13 +176,7 @@
             { name: "猿", description: "社交的で明るく、好奇心旺盛。機転が利き行動力がある。", compatible: "コアラ, たぬき" },
             { name: "チータ", description: "瞬発力があり、決断力がある行動派リーダータイプ。", compatible: "ライオン, コアラ" },
             { name: "黒ひょう", description: "プライドが高く、繊細でおしゃれ。直感で動く。", compatible: "ライオン, ゾウ" },
-            { name: "ライオン", description: "カリスマ性があり、責任感が強いリーダータイプ。", compatible: "チータ, 黒ひょう" },
-            { name: "虎", description: "情熱的で負けず嫌い。信念を貫く努力家。", compatible: "ペガサス, ひつじ" },
-            { name: "たぬき", description: "慎重で温厚。周囲への気配りができる努力家。", compatible: "猿, こじか" },
-            { name: "コアラ", description: "マイペースで冷静。芯が強く独特な発想を持つ。", compatible: "猿, チータ" },
-            { name: "ゾウ", description: "真面目で努力家。忍耐力があり信頼される。", compatible: "黒ひょう, ひつじ" },
-            { name: "ひつじ", description: "協調性があり、穏やかで周囲との調和を大切にする。", compatible: "虎, ゾウ" },
-            { name: "ペガサス", description: "自由奔放で直感的。独特な世界観を持つ天才肌。", compatible: "虎, 狼" }
+            { name: "ライオン", description: "カリスマ性があり、責任感が強いリーダータイプ。", compatible: "チータ, 黒ひょう" }
         ];
 
         function checkAnimal() {
