@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>動物占い - 1カラムレイアウト</title>
     <style>
+        /* ▼ Canvaで作成した背景画像を挿入する部分 ▼ */
+        /* 1. GitHubに画像をアップロード後、URLを取得 */
+        /* 2. URLを 'background-image' に設定 */
+        body {
+            background: url('https://ユーザー名.github.io/リポジトリ名/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        /* ▲ 背景画像設定ここまで ▲ */
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://あなたのドメイン.com/images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
             position: relative;
         }
 
@@ -21,7 +28,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.6); /* 背景を少し白くする */
             z-index: -1;
         }
 
@@ -140,9 +147,9 @@
 
         <!-- ▼ 診断結果の下の広告エリア ▼ -->
         <div class="ad-section">
-            <a href="https://www.example.com" target="_blank">
-                <img src="https://via.placeholder.com/250x150" alt="広告バナー">
-            </a>
+           <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYHYQ+2PEO+C4LLD" rel="nofollow">
+<img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=250224315529&wid=009&eno=01&mid=s00000012624002037000&mc=1"></a>
+<img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=44Z6BF+8QYHYQ+2PEO+C4LLD" alt="">
         </div>
         <!-- ▲ 診断結果の下の広告エリア ▲ -->
 
@@ -163,7 +170,7 @@
     <!-- ▼ 今日の占い結果のリンク ▼ -->
     <div class="link-section">
         <p>今日の占いの結果はこちらから👇👇</p>
-        <a href="https://www.instagram.com/あなたのアカウント" target="_blank">📷 Instagramで見る</a>
+        <a href="https://www.instagram.com/animal.uranai1_genseki" target="_blank">📷 Instagramで見る</a>
         <a href="https://あなたのブログ.com" target="_blank">📝 ブログで読む</a>
     </div>
     <!-- ▲ 今日の占い結果のリンク ▲ -->
@@ -192,17 +199,6 @@
             document.getElementById("result").innerText = `あなたの動物は「${currentAnimalData.name}」です！`;
             document.getElementById("description").innerText = `性格: ${currentAnimalData.description}`;
             document.getElementById("compatibility").innerText = `相性が良い動物: ${currentAnimalData.compatible}`;
-        }
-
-        function shareOnTwitter() {
-            if (!currentAnimalData) return alert("まずは診断してください！");
-            const text = encodeURIComponent(`私は「${currentAnimalData.name}」でした！\n#動物占い`);
-            window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank");
-        }
-
-        function shareOnFacebook() {
-            if (!currentAnimalData) return alert("まずは診断してください！");
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`, "_blank");
         }
     </script>
 
