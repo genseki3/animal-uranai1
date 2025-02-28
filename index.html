@@ -150,7 +150,6 @@
 
         <!-- ▼ 広告スペース①（診断結果の下） ▼ -->
         <div class="ad-section">
-            <p>広告スペース①（診断結果の下）</p>
             <a href="https://広告リンク1.com" target="_blank">
                 <img src="https://via.placeholder.com/250x150" alt="広告バナー1">
             </a>
@@ -165,11 +164,9 @@
 
     <!-- ▼ 広告スペース②（ページの最下部） ▼ -->
     <div class="ad-section">
-        <p>広告スペース②（ページの最下部）</p>
        <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYE3U+2PEO+C4DVL" rel="nofollow">
           <img border="0" width="300" height="250" alt="" src="https://www21.a8.net/svt/bgt?aid=250224315529&wid=004&eno=01&mid=s00000012624002036000&mc=1"></a>
-          <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=44Z6BF+8QYE3U+2PEO+C4DVL" alt="">
-    </div>
+          <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=44Z6BF+8QYE3U+2PEO+C4DVL" alt="">    </div>
     <!-- ▲ 広告スペース② ▲ -->
 
     <div class="link-section">
@@ -202,6 +199,19 @@
             document.getElementById("result").innerText = `あなたの動物は「${currentAnimalData.name}」です！`;
             document.getElementById("description").innerText = `性格: ${currentAnimalData.description}`;
             document.getElementById("compatibility").innerText = `相性が良い動物: ${currentAnimalData.compatible}`;
+        }
+
+        function shareOnTwitter() {
+            if (!currentAnimalData) return alert("まずは診断してください！");
+            const text = encodeURIComponent(`私は動物占いで「${currentAnimalData.name}」でした！\n性格:『${currentAnimalData.description}』\n#動物占い`);
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
+        }
+
+        function shareOnFacebook() {
+            if (!currentAnimalData) return alert("まずは診断してください！");
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank");
         }
     </script>
 
