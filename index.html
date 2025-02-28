@@ -33,7 +33,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: center;
-            min-height: 500px; /* 診断結果のエリアを確保 */
+            min-height: 500px;
         }
 
         h1 {
@@ -56,7 +56,7 @@
         }
 
         #result-area {
-            min-height: 150px; /* 診断結果の表示エリアを確保 */
+            min-height: 150px;
         }
 
         #result {
@@ -95,7 +95,9 @@
             padding: 20px;
             text-align: center;
             border-radius: 8px;
-            min-height: 100px; /* 広告エリアの高さを確保 */
+            min-height: 120px;
+            background: #f8f8f8;
+            border: 1px dashed #ccc;
         }
 
         .link-section {
@@ -146,13 +148,14 @@
             <p id="compatibility"></p>
         </div>
 
-        <!-- ▼ 診断結果の下の広告エリア ▼ -->
+        <!-- ▼ 広告スペース①（診断結果の下） ▼ -->
         <div class="ad-section">
-           <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" rel="nofollow">
-              <img border="0" width="1456" height="180" alt="" src="https://www26.a8.net/svt/bgt?aid=250224315529&wid=004&eno=01&mid=s00000012624002041000&mc=1"></a>
-              <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" alt="">
+            <p>広告スペース①（診断結果の下）</p>
+            <a href="https://広告リンク1.com" target="_blank">
+                <img src="https://via.placeholder.com/250x150" alt="広告バナー1">
+            </a>
         </div>
-        <!-- ▲ 診断結果の下の広告エリア ▲ -->
+        <!-- ▲ 広告スペース① ▲ -->
 
         <div class="share-buttons">
             <button onclick="shareOnTwitter()">X（旧Twitter）でシェア</button>
@@ -160,21 +163,20 @@
         </div>
     </div>
 
-    <!-- ▼ ページの最下部の広告エリア ▼ -->
+    <!-- ▼ 広告スペース②（ページの最下部） ▼ -->
     <div class="ad-section">
-        <a href="https://www.example.com" target="_blank">
-            <img src="https://via.placeholder.com/250x150" alt="広告バナー">
-        </a>
+        <p>広告スペース②（ページの最下部）</p>
+        <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" rel="nofollow">
+            <img border="0" width="1456" height="180" alt="" src="https://www26.a8.net/svt/bgt?aid=250224315529&wid=004&eno=01&mid=s00000012624002041000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" alt="">
     </div>
-    <!-- ▲ ページの最下部の広告エリア ▲ -->
+    <!-- ▲ 広告スペース② ▲ -->
 
-    <!-- ▼ 今日の占い結果のリンク ▼ -->
     <div class="link-section">
         <p>今日の占いの結果はこちらから👇👇</p>
         <a href="https://www.instagram.com/animal.uranai1_genseki" target="_blank">📷 Instagramで見る</a>
-        <a href="https://animal-uranai.seesaa.net/" target="_blank">📝 ブログで読む</a>
+        <a href="https://animal-uranai1.seesaa.net" target="_blank">📝 ブログで読む</a>
     </div>
-    <!-- ▲ 今日の占い結果のリンク ▲ -->
 
     <script>
         let currentAnimalData = null;
