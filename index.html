@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>動物占い - 1カラムレイアウト</title>
     <style>
-        /* ▼ Canvaで作成した背景画像を挿入する部分 ▼ */
-        /* 1. GitHubに画像をアップロード後、URLを取得 */
-        /* 2. URLを 'background-image' に設定 */
-        body {
-            background: url('https://ユーザー名.github.io/リポジトリ名/background.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        /* ▲ 背景画像設定ここまで ▲ */
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: url('https://あなたのドメイン.com/images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
             position: relative;
         }
 
@@ -28,7 +21,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.6); /* 背景を少し白くする */
+            background: rgba(255, 255, 255, 0.6);
             z-index: -1;
         }
 
@@ -40,6 +33,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             text-align: center;
+            min-height: 500px; /* 診断結果のエリアを確保 */
         }
 
         h1 {
@@ -59,6 +53,10 @@
             margin: 10px;
             padding: 10px;
             font-size: 16px;
+        }
+
+        #result-area {
+            min-height: 150px; /* 診断結果の表示エリアを確保 */
         }
 
         #result {
@@ -97,6 +95,7 @@
             padding: 20px;
             text-align: center;
             border-radius: 8px;
+            min-height: 100px; /* 広告エリアの高さを確保 */
         }
 
         .link-section {
@@ -141,15 +140,17 @@
         <input type="date" id="birthdate">
         <button onclick="checkAnimal()">診断する</button>
 
-        <p id="result"></p>
-        <p id="description"></p>
-        <p id="compatibility"></p>
+        <div id="result-area">
+            <p id="result"></p>
+            <p id="description"></p>
+            <p id="compatibility"></p>
+        </div>
 
         <!-- ▼ 診断結果の下の広告エリア ▼ -->
         <div class="ad-section">
-            <a href="https://www.example.com" target="_blank">
-                <img src="https://via.placeholder.com/250x150" alt="広告バナー">
-            </a>
+           <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" rel="nofollow">
+              <img border="0" width="1456" height="180" alt="" src="https://www26.a8.net/svt/bgt?aid=250224315529&wid=004&eno=01&mid=s00000012624002041000&mc=1"></a>
+              <img border="0" width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=44Z6BF+8QYE3U+2PEO+C5GGH" alt="">
         </div>
         <!-- ▲ 診断結果の下の広告エリア ▲ -->
 
@@ -161,9 +162,9 @@
 
     <!-- ▼ ページの最下部の広告エリア ▼ -->
     <div class="ad-section">
-       <a href="https://px.a8.net/svt/ejp?a8mat=44Z6BF+8QYHYQ+2PEO+C4LLD" rel="nofollow">
-           <img border="0" width="300" height="250" alt="" src="https://www28.a8.net/svt/bgt?aid=250224315529&wid=009&eno=01&mid=s00000012624002037000&mc=1"></a>
-               <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=44Z6BF+8QYHYQ+2PEO+C4LLD" alt="">
+        <a href="https://www.example.com" target="_blank">
+            <img src="https://via.placeholder.com/250x150" alt="広告バナー">
+        </a>
     </div>
     <!-- ▲ ページの最下部の広告エリア ▲ -->
 
@@ -171,7 +172,7 @@
     <div class="link-section">
         <p>今日の占いの結果はこちらから👇👇</p>
         <a href="https://www.instagram.com/animal.uranai1_genseki" target="_blank">📷 Instagramで見る</a>
-        <a href="https://あなたのブログ.com" target="_blank">📝 ブログで読む</a>
+        <a href="https://animal-uranai.seesaa.net/" target="_blank">📝 ブログで読む</a>
     </div>
     <!-- ▲ 今日の占い結果のリンク ▲ -->
 
